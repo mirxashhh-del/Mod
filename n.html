@@ -1,0 +1,1876 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XentzMod - Minecraft Mod İndirme</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2e7d32;
+            --secondary-color: #4caf50;
+            --dark-color: #1b5e20;
+            --light-color: #e8f5e9;
+            --text-color: #333;
+            --bg-color: #f5f5f5;
+            --card-bg: #ffffff;
+            --border-radius: 12px;
+            --shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .theme-dark {
+            --primary-color: #4caf50;
+            --secondary-color: #66bb6a;
+            --dark-color: #1b5e20;
+            --light-color: #2e2e2e;
+            --text-color: #e0e0e0;
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .theme-blue {
+            --primary-color: #1565c0;
+            --secondary-color: #1976d2;
+            --dark-color: #0d47a1;
+            --light-color: #e3f2fd;
+            --text-color: #333;
+            --bg-color: #f5f9ff;
+            --card-bg: #ffffff;
+        }
+
+        .theme-purple {
+            --primary-color: #7b1fa2;
+            --secondary-color: #9c27b0;
+            --dark-color: #4a148c;
+            --light-color: #f3e5f5;
+            --text-color: #333;
+            --bg-color: #faf5ff;
+            --card-bg: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: var(--transition);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.8rem 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        .logo i {
+            font-size: 1.5rem;
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .hamburger-menu {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 25px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .hamburger-menu span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: white;
+            border-radius: 2px;
+            transition: var(--transition);
+        }
+
+        .language-selector {
+            display: flex;
+            gap: 5px;
+        }
+
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.8rem;
+        }
+
+        .lang-btn.active {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        .theme-selector {
+            display: flex;
+            gap: 5px;
+        }
+
+        .theme-btn {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid white;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .theme-btn.default {
+            background: linear-gradient(135deg, #2e7d32, #4caf50);
+        }
+
+        .theme-btn.dark {
+            background: linear-gradient(135deg, #121212, #2e2e2e);
+        }
+
+        .theme-btn.blue {
+            background: linear-gradient(135deg, #1565c0, #1976d2);
+        }
+
+        .theme-btn.purple {
+            background: linear-gradient(135deg, #7b1fa2, #9c27b0);
+        }
+
+        .search-container {
+            display: flex;
+            width: 40%;
+        }
+
+        .search-container input {
+            flex: 1;
+            padding: 10px 15px;
+            border: none;
+            border-radius: var(--border-radius) 0 0 var(--border-radius);
+            font-size: 0.9rem;
+            background: rgba(255, 255, 255, 0.9);
+            transition: var(--transition);
+        }
+
+        .search-container input:focus {
+            background: white;
+            outline: none;
+            box-shadow: 0 0 0 2px var(--secondary-color);
+        }
+
+        .search-container button {
+            background-color: var(--dark-color);
+            color: white;
+            border: none;
+            padding: 0 18px;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .search-container button:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 15px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 6px 12px;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            font-size: 0.9rem;
+        }
+
+        nav a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+
+        nav a:hover::before, nav a.active::before {
+            left: 0;
+        }
+
+        nav a:hover, nav a.active {
+            background-color: var(--dark-color);
+            transform: translateY(-2px);
+        }
+
+        /* Sidebar Filters */
+        .sidebar {
+            position: fixed;
+            left: -300px;
+            top: 0;
+            width: 280px;
+            height: 100%;
+            background-color: var(--card-bg);
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 200;
+            transition: var(--transition);
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .sidebar-header h3 {
+            font-size: 1.2rem;
+            color: var(--text-color);
+        }
+
+        .close-sidebar {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-color);
+            transition: var(--transition);
+        }
+
+        .close-sidebar:hover {
+            transform: rotate(90deg);
+        }
+
+        .filter-group {
+            margin-bottom: 20px;
+        }
+
+        .filter-group h4 {
+            font-size: 1rem;
+            margin-bottom: 10px;
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .filter-group h4 i {
+            color: var(--primary-color);
+        }
+
+        .filter-options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .filter-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+
+        .filter-option:hover {
+            background-color: var(--light-color);
+        }
+
+        .filter-option.active {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .filter-select {
+            width: 100%;
+            padding: 10px;
+            border-radius: var(--border-radius);
+            border: 1px solid #ddd;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .filter-select:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px var(--secondary-color);
+        }
+
+        /* Main Content */
+        main {
+            padding: 1.5rem 0;
+        }
+
+        .section-title {
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--secondary-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-title h1 {
+            font-size: 1.5rem;
+        }
+
+        .mobile-filters-btn {
+            display: none;
+            padding: 8px 15px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .mobile-filters-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* List Layout */
+        .list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .list-item {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            gap: 15px;
+            position: relative;
+        }
+
+        .list-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--primary-color);
+            transform: scaleY(0);
+            transition: var(--transition);
+        }
+
+        .list-item:hover::before {
+            transform: scaleY(1);
+        }
+
+        .list-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .item-image {
+            width: 70px;
+            height: 70px;
+            overflow: hidden;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--border-radius);
+            flex-shrink: 0;
+            transition: var(--transition);
+        }
+
+        .list-item:hover .item-image {
+            transform: scale(1.05);
+        }
+
+        .item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .item-content {
+            flex: 1;
+        }
+
+        .item-title {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: var(--text-color);
+            transition: var(--transition);
+        }
+
+        .item-description {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 10px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .item-meta {
+            display: flex;
+            gap: 15px;
+            font-size: 0.75rem;
+            color: #777;
+        }
+
+        .item-downloads {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .item-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            position: relative;
+            overflow: hidden;
+            font-size: 0.85rem;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: var(--transition);
+        }
+
+        .btn:hover::before {
+            left: 0;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 1.5rem 0;
+            margin-top: 2rem;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-links a {
+            color: #e0e0e0;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #e0e0e0;
+        }
+
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            font-size: 1.2rem;
+        }
+
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: var(--primary-color);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0;
+            gap: 8px;
+        }
+
+        .pagination button {
+            padding: 8px 14px;
+            border: 1px solid #ddd;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+
+        .pagination button:hover {
+            background-color: var(--light-color);
+            transform: translateY(-2px);
+        }
+
+        .pagination button.active {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-color: var(--primary-color);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Download Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            transform: translateY(20px);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .modal.show .modal-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .modal-header {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--primary-color);
+            color: white;
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            font-size: 1.3rem;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: white;
+            transition: var(--transition);
+        }
+
+        .close-modal:hover {
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        .download-options {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .option-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option-group label {
+            font-weight: 500;
+            color: var(--text-color);
+            font-size: 0.9rem;
+        }
+
+        .option-group select {
+            padding: 10px;
+            border-radius: var(--border-radius);
+            border: 1px solid #ddd;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            font-size: 0.9rem;
+        }
+
+        .version-list, .loader-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .version-item, .loader-item {
+            padding: 8px 12px;
+            background-color: var(--light-color);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1px solid transparent;
+            font-size: 0.85rem;
+        }
+
+        .version-item:hover, .loader-item:hover {
+            background-color: var(--secondary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .version-item.active, .loader-item.active {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .file-list {
+            margin-top: 20px;
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #eee;
+            border-radius: var(--border-radius);
+        }
+
+        .file-item {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .file-item:hover {
+            background-color: var(--light-color);
+        }
+
+        .file-item:last-child {
+            border-bottom: none;
+        }
+
+        .file-info {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .file-name {
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .file-details {
+            font-size: 0.75rem;
+            color: #777;
+        }
+
+        .download-file {
+            padding: 6px 12px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.8rem;
+        }
+
+        .download-file:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .no-files {
+            padding: 20px;
+            text-align: center;
+            color: #777;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .search-container {
+                width: 50%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            
+            .hamburger-menu {
+                display: flex;
+            }
+            
+            .logo {
+                font-size: 1.1rem;
+            }
+            
+            .header-controls {
+                order: 1;
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .search-container {
+                width: 100%;
+                order: 2;
+            }
+            
+            nav {
+                display: none;
+            }
+            
+            .mobile-filters-btn {
+                display: block;
+            }
+            
+            .list-item {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .item-actions {
+                justify-content: center;
+            }
+            
+            .item-image {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .footer-links {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-content {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .logo {
+                font-size: 1rem;
+            }
+            
+            .search-container {
+                order: 1;
+            }
+            
+            .header-controls {
+                order: 2;
+            }
+            
+            .pagination button {
+                padding: 6px 10px;
+                font-size: 0.8rem;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body class="theme-default">
+    <!-- Sidebar Filtreler -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3 id="sidebarTitle">Filtreler</h3>
+            <button class="close-sidebar">&times;</button>
+        </div>
+        
+        <div class="filter-group">
+            <h4><i class="fas fa-sort-amount-down"></i> Sıralama</h4>
+            <div class="filter-options" id="sortOptions">
+                <div class="filter-option active" data-sort="downloads">
+                    <i class="fas fa-fire"></i> En Popüler
+                </div>
+                <div class="filter-option" data-sort="newest">
+                    <i class="fas fa-star"></i> En Yeni
+                </div>
+                <div class="filter-option" data-sort="updated">
+                    <i class="fas fa-sync"></i> Son Güncellenen
+                </div>
+            </div>
+        </div>
+        
+        <div class="filter-group">
+            <h4><i class="fas fa-cube"></i> Minecraft Sürümü</h4>
+            <select class="filter-select" id="sidebarVersionFilter">
+                <option value="">Tüm Sürümler</option>
+                <!-- Sürümler JavaScript ile eklenecek -->
+            </select>
+        </div>
+        
+        <div class="filter-group">
+            <h4><i class="fas fa-puzzle-piece"></i> Mod Loader</h4>
+            <select class="filter-select" id="sidebarLoaderFilter">
+                <option value="">Tüm Loader'lar</option>
+                <option value="fabric">Fabric</option>
+                <option value="forge">Forge</option>
+                <option value="quilt">Quilt</option>
+            </select>
+        </div>
+        
+        <div class="filter-group">
+            <h4><i class="fas fa-filter"></i> İçerik Türü</h4>
+            <div class="filter-options" id="typeOptions">
+                <div class="filter-option active" data-type="mod">
+                    <i class="fas fa-cubes"></i> Modlar
+                </div>
+                <div class="filter-option" data-type="resourcepack">
+                    <i class="fas fa-palette"></i> Resource Pack'ler
+                </div>
+                <div class="filter-option" data-type="modpack">
+                    <i class="fas fa-box"></i> Modpack'ler
+                </div>
+                <div class="filter-option" data-type="shader">
+                    <i class="fas fa-magic"></i> Shader'lar
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <div class="container header-content">
+            <div class="hamburger-menu" id="hamburgerMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            
+            <div class="logo">
+                <i class="fas fa-cube"></i>
+                <span>XentzMod</span>
+            </div>
+            
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Mod, resource pack, modpack veya shader ara...">
+                <button id="searchButton"><i class="fas fa-search"></i></button>
+            </div>
+            
+            <div class="header-controls">
+                <div class="language-selector">
+                    <button class="lang-btn active" data-lang="tr">TR</button>
+                    <button class="lang-btn" data-lang="ru">RU</button>
+                </div>
+                
+                <div class="theme-selector">
+                    <button class="theme-btn default" data-theme="default"></button>
+                    <button class="theme-btn dark" data-theme="dark"></button>
+                    <button class="theme-btn blue" data-theme="blue"></button>
+                    <button class="theme-btn purple" data-theme="purple"></button>
+                </div>
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="#" class="active" data-type="mod">Modlar</a></li>
+                    <li><a href="#" data-type="resourcepack">Resource Pack'ler</a></li>
+                    <li><a href="#" data-type="modpack">Modpack'ler</a></li>
+                    <li><a href="#" data-type="shader">Shader'lar</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="section-title">
+            <h1 id="pageTitle">Popüler Modlar</h1>
+            <button class="mobile-filters-btn" id="mobileFiltersBtn">
+                <i class="fas fa-filter"></i> Filtreler
+            </button>
+        </div>
+
+        <div class="pagination" id="topPagination">
+            <!-- Sayfalama butonları burada görünecek -->
+        </div>
+
+        <div id="contentList" class="list">
+            <!-- Modlar burada görünecek -->
+            <div class="loading">
+                <div class="spinner"></div>
+                <p>Modlar yükleniyor...</p>
+            </div>
+        </div>
+
+        <div class="pagination" id="bottomPagination">
+            <!-- Sayfalama butonları burada görünecek -->
+        </div>
+    </main>
+
+    <!-- İndirme Modalı -->
+    <div class="modal" id="downloadModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Mod İndir</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="download-options">
+                    <div class="option-group">
+                        <label>Minecraft Sürümü:</label>
+                        <div class="version-list" id="versionList">
+                            <!-- Sürümler burada görünecek -->
+                        </div>
+                    </div>
+                    <div class="option-group">
+                        <label>Mod Loader:</label>
+                        <div class="loader-list" id="loaderList">
+                            <!-- Loader'lar burada görünecek -->
+                        </div>
+                    </div>
+                    <div class="option-group">
+                        <label>Dosyalar:</label>
+                        <div class="file-list" id="fileList">
+                            <!-- Dosyalar burada görünecek -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-cube"></i>
+                    <span>XentzMod</span>
+                </div>
+                <div class="footer-links">
+                    <a href="#">Gizlilik Politikası</a>
+                    <a href="#">Kullanım Şartları</a>
+                    <a href="#">İletişim</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 XentzMod. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Dil çevirileri
+        const translations = {
+            tr: {
+                filters: "Filtreler",
+                searchPlaceholder: "Mod, resource pack, modpack veya shader ara...",
+                mods: "Modlar",
+                resourcepacks: "Resource Pack'ler",
+                modpacks: "Modpack'ler",
+                shaders: "Shader'lar",
+                popularMods: "Popüler Modlar",
+                popularResourcePacks: "Popüler Resource Pack'ler",
+                popularModpacks: "Popüler Modpack'ler",
+                popularShaders: "Popüler Shader'lar",
+                minecraftVersion: "Minecraft Sürümü",
+                allVersions: "Tüm Sürümler",
+                modLoader: "Mod Loader",
+                allLoaders: "Tüm Loader'lar",
+                sortBy: "Sıralama",
+                mostPopular: "En Popüler",
+                newest: "En Yeni",
+                lastUpdated: "Son Güncellenen",
+                contentType: "İçerik Türü",
+                downloads: "indirme",
+                download: "İndir",
+                loading: "İçerik yükleniyor...",
+                searching: "Aranıyor...",
+                noContent: "Hiç içerik bulunamadı.",
+                errorLoading: "İçerik yüklenirken bir hata oluştu.",
+                errorSearching: "Arama sırasında bir hata oluştu.",
+                downloadMod: "Mod İndir",
+                noVersions: "Kullanılabilir sürüm bulunamadı.",
+                noLoaders: "Kullanılabilir loader bulunamadı.",
+                noFiles: "Seçilen kriterlere uygun dosya bulunamadı.",
+                fileSize: "MB",
+                downloadSuccess: "başarıyla indirildi!",
+                downloadError: "Dosya indirilirken bir hata oluştu."
+            },
+            ru: {
+                filters: "Фильтры",
+                searchPlaceholder: "Поиск модов, ресурс-паков, модпаков или шейдеров...",
+                mods: "Моды",
+                resourcepacks: "Ресурс-паки",
+                modpacks: "Модпаки",
+                shaders: "Шейдеры",
+                popularMods: "Популярные моды",
+                popularResourcePacks: "Популярные ресурс-паки",
+                popularModpacks: "Популярные модпаки",
+                popularShaders: "Популярные шейдеры",
+                minecraftVersion: "Версия Minecraft",
+                allVersions: "Все версии",
+                modLoader: "Мод Лоадер",
+                allLoaders: "Все лоадеры",
+                sortBy: "Сортировка",
+                mostPopular: "Самые популярные",
+                newest: "Новейшие",
+                lastUpdated: "Недавно обновленные",
+                contentType: "Тип контента",
+                downloads: "скачиваний",
+                download: "Скачать",
+                loading: "Загрузка контента...",
+                searching: "Поиск...",
+                noContent: "Контент не найден.",
+                errorLoading: "Ошибка при загрузке контента.",
+                errorSearching: "Ошибка при поиске.",
+                downloadMod: "Скачать мод",
+                noVersions: "Доступные версии не найдены.",
+                noLoaders: "Доступные загрузчики не найдены.",
+                noFiles: "Файлы, соответствующие выбранным критериям, не найдены.",
+                fileSize: "МБ",
+                downloadSuccess: "успешно скачан!",
+                downloadError: "Ошибка при скачивании файла."
+            }
+        };
+
+        // Mevcut dil
+        let currentLang = 'tr';
+
+        // Minecraft sürümleri
+        const minecraftVersions = [
+            "1.21.1", "1.21", "1.20.6", "1.20.5", "1.20.4", "1.20.3", "1.20.2", "1.20.1", 
+            "1.20", "1.19.4", "1.19.3", "1.19.2", "1.19.1", "1.19", "1.18.2", "1.18.1", 
+            "1.18", "1.17.1", "1.17", "1.16.5", "1.16.4", "1.16.3", "1.16.2", "1.16.1", 
+            "1.16", "1.15.2", "1.15.1", "1.15", "1.14.4", "1.14.3", "1.14.2", "1.14.1", 
+            "1.14", "1.13.2", "1.13.1", "1.13", "1.12.2", "1.12.1", "1.12", "1.11.2", 
+            "1.11.1", "1.11", "1.10.2", "1.10.1", "1.10", "1.9.4", "1.9.3", "1.9.2", 
+            "1.9.1", "1.9", "1.8.9", "1.8.8", "1.8.7", "1.8.6", "1.8.5", "1.8.4", 
+            "1.8.3", "1.8.2", "1.8.1", "1.8"
+        ];
+
+        // Sayfa yüklendiğinde çalışacak kod
+        document.addEventListener('DOMContentLoaded', function() {
+            // Minecraft sürümlerini dropdown'a ekle
+            const sidebarVersionFilter = document.getElementById('sidebarVersionFilter');
+            if (sidebarVersionFilter) {
+                minecraftVersions.forEach(version => {
+                    const option = document.createElement('option');
+                    option.value = version;
+                    option.textContent = version;
+                    sidebarVersionFilter.appendChild(option);
+                });
+            }
+
+            // Varsayılan olarak modları yükle
+            loadContent('mod', 'downloads');
+            
+            // Hamburger menü tıklama olayı
+            document.getElementById('hamburgerMenu').addEventListener('click', function() {
+                document.getElementById('sidebar').classList.add('active');
+            });
+            
+            // Sidebar kapatma
+            document.querySelector('.close-sidebar').addEventListener('click', function() {
+                document.getElementById('sidebar').classList.remove('active');
+            });
+            
+            // Mobil filtre butonu
+            document.getElementById('mobileFiltersBtn').addEventListener('click', function() {
+                document.getElementById('sidebar').classList.add('active');
+            });
+            
+            // Sıralama seçenekleri
+            document.querySelectorAll('#sortOptions .filter-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('#sortOptions .filter-option').forEach(opt => {
+                        opt.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                    
+                    const sortBy = this.getAttribute('data-sort');
+                    const activeType = document.querySelector('#typeOptions .filter-option.active').getAttribute('data-type');
+                    loadContent(activeType, sortBy);
+                });
+            });
+            
+            // İçerik türü seçenekleri
+            document.querySelectorAll('#typeOptions .filter-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('#typeOptions .filter-option').forEach(opt => {
+                        opt.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                    
+                    const type = this.getAttribute('data-type');
+                    const sortBy = document.querySelector('#sortOptions .filter-option.active').getAttribute('data-sort');
+                    document.getElementById('pageTitle').textContent = getPageTitle(type);
+                    loadContent(type, sortBy);
+                });
+            });
+            
+            // Sürüm filtreleme
+            document.getElementById('sidebarVersionFilter').addEventListener('change', function() {
+                const activeType = document.querySelector('#typeOptions .filter-option.active').getAttribute('data-type');
+                const sortBy = document.querySelector('#sortOptions .filter-option.active').getAttribute('data-sort');
+                loadContent(activeType, sortBy);
+            });
+            
+            // Loader filtreleme
+            document.getElementById('sidebarLoaderFilter').addEventListener('change', function() {
+                const activeType = document.querySelector('#typeOptions .filter-option.active').getAttribute('data-type');
+                const sortBy = document.querySelector('#sortOptions .filter-option.active').getAttribute('data-sort');
+                loadContent(activeType, sortBy);
+            });
+            
+            // Arama butonu tıklama olayı
+            document.getElementById('searchButton').addEventListener('click', performSearch);
+            
+            // Arama input'una enter tuşu ile arama
+            document.getElementById('searchInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
+            });
+            
+            // Modal kapatma
+            document.querySelector('.close-modal').addEventListener('click', function() {
+                closeModal();
+            });
+            
+            // Modal dışına tıklayınca kapatma
+            window.addEventListener('click', function(e) {
+                if (e.target === document.getElementById('downloadModal')) {
+                    closeModal();
+                }
+                if (e.target === document.getElementById('sidebar')) {
+                    document.getElementById('sidebar').classList.remove('active');
+                }
+            });
+            
+            // Dil değiştirme
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    currentLang = this.getAttribute('data-lang');
+                    translatePage();
+                });
+            });
+            
+            // Tema değiştirme
+            document.querySelectorAll('.theme-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const theme = this.getAttribute('data-theme');
+                    document.body.className = `theme-${theme}`;
+                });
+            });
+        });
+        
+        // Sayfa çevirisi
+        function translatePage() {
+            const t = translations[currentLang];
+            
+            // Sidebar
+            document.getElementById('sidebarTitle').textContent = t.filters;
+            
+            // Sıralama seçenekleri
+            const sortOptions = document.querySelectorAll('#sortOptions .filter-option');
+            if (sortOptions.length > 0) {
+                sortOptions[0].innerHTML = `<i class="fas fa-fire"></i> ${t.mostPopular}`;
+                sortOptions[1].innerHTML = `<i class="fas fa-star"></i> ${t.newest}`;
+                sortOptions[2].innerHTML = `<i class="fas fa-sync"></i> ${t.lastUpdated}`;
+            }
+            
+            // Minecraft sürümü
+            const minecraftVersionLabel = document.querySelector('.filter-group h4:nth-of-type(2)');
+            if (minecraftVersionLabel) {
+                minecraftVersionLabel.innerHTML = `<i class="fas fa-cube"></i> ${t.minecraftVersion}`;
+            }
+            
+            const versionFilter = document.getElementById('sidebarVersionFilter');
+            if (versionFilter && versionFilter.options.length > 0) {
+                versionFilter.options[0].textContent = t.allVersions;
+            }
+            
+            // Mod Loader
+            const modLoaderLabel = document.querySelector('.filter-group h4:nth-of-type(3)');
+            if (modLoaderLabel) {
+                modLoaderLabel.innerHTML = `<i class="fas fa-puzzle-piece"></i> ${t.modLoader}`;
+            }
+            
+            const loaderFilter = document.getElementById('sidebarLoaderFilter');
+            if (loaderFilter && loaderFilter.options.length > 0) {
+                loaderFilter.options[0].textContent = t.allLoaders;
+            }
+            
+            // İçerik türü
+            const contentTypeLabel = document.querySelector('.filter-group h4:nth-of-type(4)');
+            if (contentTypeLabel) {
+                contentTypeLabel.innerHTML = `<i class="fas fa-filter"></i> ${t.contentType}`;
+            }
+            
+            const typeOptions = document.querySelectorAll('#typeOptions .filter-option');
+            if (typeOptions.length > 0) {
+                typeOptions[0].innerHTML = `<i class="fas fa-cubes"></i> ${t.mods}`;
+                typeOptions[1].innerHTML = `<i class="fas fa-palette"></i> ${t.resourcepacks}`;
+                typeOptions[2].innerHTML = `<i class="fas fa-box"></i> ${t.modpacks}`;
+                typeOptions[3].innerHTML = `<i class="fas fa-magic"></i> ${t.shaders}`;
+            }
+            
+            // Arama placeholder
+            document.getElementById('searchInput').placeholder = t.searchPlaceholder;
+            
+            // Sayfa başlığı
+            const activeType = document.querySelector('#typeOptions .filter-option.active');
+            if (activeType) {
+                const type = activeType.getAttribute('data-type');
+                document.getElementById('pageTitle').textContent = getPageTitle(type);
+            }
+        }
+        
+        // Sayfa başlığını türe göre belirle
+        function getPageTitle(type) {
+            const t = translations[currentLang];
+            switch(type) {
+                case 'mod': return t.popularMods;
+                case 'resourcepack': return t.popularResourcePacks;
+                case 'modpack': return t.popularModpacks;
+                case 'shader': return t.popularShaders;
+                default: return t.popularMods;
+            }
+        }
+        
+        // Arama işlemini gerçekleştir
+        function performSearch() {
+            const query = document.getElementById('searchInput').value;
+            const activeTypeElement = document.querySelector('#typeOptions .filter-option.active');
+            const sortByElement = document.querySelector('#sortOptions .filter-option.active');
+            
+            if (!activeTypeElement || !sortByElement) return;
+            
+            const activeType = activeTypeElement.getAttribute('data-type');
+            const sortBy = sortByElement.getAttribute('data-sort');
+            
+            if (query.trim() === '') {
+                loadContent(activeType, sortBy);
+            } else {
+                searchContent(activeType, query, sortBy);
+            }
+        }
+        
+        // İçerik yükleme fonksiyonu
+        function loadContent(type, sortBy, offset = 0) {
+            const list = document.getElementById('contentList');
+            const t = translations[currentLang];
+            list.innerHTML = `<div class="loading"><div class="spinner"></div><p>${t.loading}</p></div>`;
+            
+            // Modrinth API'den veri çekme
+            fetchFromModrinth(type, sortBy, offset);
+        }
+        
+        // Arama fonksiyonu
+        function searchContent(type, query, sortBy, offset = 0) {
+            const list = document.getElementById('contentList');
+            const t = translations[currentLang];
+            list.innerHTML = `<div class="loading"><div class="spinner"></div><p>${t.searching}</p></div>`;
+            
+            // Modrinth API'den arama yapma
+            searchModrinth(type, query, sortBy, offset);
+        }
+        
+        // Modrinth API'den veri çekme
+        async function fetchFromModrinth(type, sortBy, offset = 0) {
+            const versionFilter = document.getElementById('sidebarVersionFilter');
+            const loaderFilter = document.getElementById('sidebarLoaderFilter');
+            
+            const versionValue = versionFilter ? versionFilter.value : '';
+            const loaderValue = loaderFilter ? loaderFilter.value : '';
+            
+            let sortField = 'downloads';
+            
+            switch(sortBy) {
+                case 'updated':
+                    sortField = 'updated';
+                    break;
+                case 'newest':
+                    sortField = 'published';
+                    break;
+                default:
+                    sortField = 'downloads';
+            }
+            
+            // Doğru facet formatını oluştur
+            let facets = [];
+            
+            // Proje türü
+            facets.push(`["project_type:${type}"]`);
+            
+            // Minecraft sürümü
+            if (versionValue) {
+                facets.push(`["versions:${versionValue}"]`);
+            }
+            
+            // Loader
+            if (loaderValue) {
+                facets.push(`["categories:${loaderValue}"]`);
+            }
+            
+            // Facet array'ini string formatına çevir
+            const facetsString = `[${facets.join(',')}]`;
+            
+            let url = `https://api.modrinth.com/v2/search?facets=${encodeURIComponent(facetsString)}&limit=12&offset=${offset}&index=${sortField}`;
+            
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                displayContent(data.hits, data.total_hits, offset);
+            } catch (error) {
+                console.error('API hatası:', error);
+                const t = translations[currentLang];
+                document.getElementById('contentList').innerHTML = `<p style="text-align: center; padding: 2rem;">${t.errorLoading}</p>`;
+            }
+        }
+        
+        // Modrinth API'den arama yapma
+        async function searchModrinth(type, query, sortBy, offset = 0) {
+            const versionFilter = document.getElementById('sidebarVersionFilter');
+            const loaderFilter = document.getElementById('sidebarLoaderFilter');
+            
+            const versionValue = versionFilter ? versionFilter.value : '';
+            const loaderValue = loaderFilter ? loaderFilter.value : '';
+            
+            let sortField = 'downloads';
+            
+            switch(sortBy) {
+                case 'updated':
+                    sortField = 'updated';
+                    break;
+                case 'newest':
+                    sortField = 'published';
+                    break;
+                default:
+                    sortField = 'downloads';
+            }
+            
+            // Doğru facet formatını oluştur
+            let facets = [];
+            
+            // Proje türü
+            facets.push(`["project_type:${type}"]`);
+            
+            // Minecraft sürümü
+            if (versionValue) {
+                facets.push(`["versions:${versionValue}"]`);
+            }
+            
+            // Loader
+            if (loaderValue) {
+                facets.push(`["categories:${loaderValue}"]`);
+            }
+            
+            // Facet array'ini string formatına çevir
+            const facetsString = `[${facets.join(',')}]`;
+            
+            let url = `https://api.modrinth.com/v2/search?query=${encodeURIComponent(query)}&facets=${encodeURIComponent(facetsString)}&limit=12&offset=${offset}&index=${sortField}`;
+            
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                displayContent(data.hits, data.total_hits, offset);
+            } catch (error) {
+                console.error('API hatası:', error);
+                const t = translations[currentLang];
+                document.getElementById('contentList').innerHTML = `<p style="text-align: center; padding: 2rem;">${t.errorSearching}</p>`;
+            }
+        }
+        
+        // İçeriği görüntüleme fonksiyonu
+        function displayContent(content, totalHits = 0, offset = 0) {
+            const list = document.getElementById('contentList');
+            const t = translations[currentLang];
+            list.innerHTML = '';
+            
+            if (!content || content.length === 0) {
+                list.innerHTML = `<p style="text-align: center; padding: 2rem;">${t.noContent}</p>`;
+                document.getElementById('topPagination').innerHTML = '';
+                document.getElementById('bottomPagination').innerHTML = '';
+                return;
+            }
+            
+            content.forEach(item => {
+                const listItem = document.createElement('div');
+                listItem.className = 'list-item';
+                
+                // Varsayılan ikon URL'si
+                let iconUrl = item.icon_url || 'https://cdn.modrinth.com/placeholder.svg';
+                
+                // Özel karakterleri temizle ve güvenli bir ID oluştur
+                const safeId = (item.project_id || item.id || '').replace(/[^a-zA-Z0-9]/g, '_');
+                const safeTitle = (item.title || '').replace(/'/g, "\\'");
+                
+                listItem.innerHTML = `
+                    <div class="item-image">
+                        <img src="${iconUrl}" alt="${item.title}" onerror="this.src='https://cdn.modrinth.com/placeholder.svg'">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-title">${item.title}</h3>
+                        <p class="item-description">${item.description}</p>
+                        <div class="item-meta">
+                            <span class="item-downloads">
+                                <i class="fas fa-download"></i> ${formatNumber(item.downloads)} ${t.downloads}
+                            </span>
+                            <span>${item.versions ? item.versions[0] : 'N/A'}</span>
+                            <span>${formatDate(item.date_modified || item.date_created)}</span>
+                        </div>
+                    </div>
+                    <div class="item-actions">
+                        <button class="btn btn-primary" onclick="openDownloadModal('${safeId}', '${safeTitle}')">
+                            <i class="fas fa-download"></i> ${t.download}
+                        </button>
+                    </div>
+                `;
+                list.appendChild(listItem);
+            });
+            
+            // Sayfalama butonlarını oluştur
+            createPagination(totalHits, offset);
+        }
+        
+        // Sayfalama butonlarını oluştur
+        function createPagination(totalHits, offset) {
+            const topPagination = document.getElementById('topPagination');
+            const bottomPagination = document.getElementById('bottomPagination');
+            topPagination.innerHTML = '';
+            bottomPagination.innerHTML = '';
+            
+            const itemsPerPage = 12;
+            const totalPages = Math.ceil(totalHits / itemsPerPage);
+            const currentPage = Math.floor(offset / itemsPerPage) + 1;
+            
+            if (totalPages <= 1) return;
+            
+            // Önceki sayfa butonu
+            if (currentPage > 1) {
+                const prevButton = createPaginationButton('<i class="fas fa-chevron-left"></i>', () => {
+                    const activeTypeElement = document.querySelector('#typeOptions .filter-option.active');
+                    const sortByElement = document.querySelector('#sortOptions .filter-option.active');
+                    const query = document.getElementById('searchInput').value;
+                    
+                    if (!activeTypeElement || !sortByElement) return;
+                    
+                    const activeType = activeTypeElement.getAttribute('data-type');
+                    const sortBy = sortByElement.getAttribute('data-sort');
+                    
+                    if (query.trim() === '') {
+                        loadContent(activeType, sortBy, offset - itemsPerPage);
+                    } else {
+                        searchContent(activeType, query, sortBy, offset - itemsPerPage);
+                    }
+                });
+                topPagination.appendChild(prevButton);
+                bottomPagination.appendChild(prevButton.cloneNode(true));
+            }
+            
+            // Sayfa numaraları
+            const startPage = Math.max(1, currentPage - 2);
+            const endPage = Math.min(totalPages, currentPage + 2);
+            
+            for (let i = startPage; i <= endPage; i++) {
+                const pageButton = createPaginationButton(i, () => {
+                    const activeTypeElement = document.querySelector('#typeOptions .filter-option.active');
+                    const sortByElement = document.querySelector('#sortOptions .filter-option.active');
+                    const query = document.getElementById('searchInput').value;
+                    
+                    if (!activeTypeElement || !sortByElement) return;
+                    
+                    const activeType = activeTypeElement.getAttribute('data-type');
+                    const sortBy = sortByElement.getAttribute('data-sort');
+                    
+                    if (query.trim() === '') {
+                        loadContent(activeType, sortBy, (i - 1) * itemsPerPage);
+                    } else {
+                        searchContent(activeType, query, sortBy, (i - 1) * itemsPerPage);
+                    }
+                }, i === currentPage);
+                topPagination.appendChild(pageButton);
+                bottomPagination.appendChild(pageButton.cloneNode(true));
+            }
+            
+            // Sonraki sayfa butonu
+            if (currentPage < totalPages) {
+                const nextButton = createPaginationButton('<i class="fas fa-chevron-right"></i>', () => {
+                    const activeTypeElement = document.querySelector('#typeOptions .filter-option.active');
+                    const sortByElement = document.querySelector('#sortOptions .filter-option.active');
+                    const query = document.getElementById('searchInput').value;
+                    
+                    if (!activeTypeElement || !sortByElement) return;
+                    
+                    const activeType = activeTypeElement.getAttribute('data-type');
+                    const sortBy = sortByElement.getAttribute('data-sort');
+                    
+                    if (query.trim() === '') {
+                        loadContent(activeType, sortBy, offset + itemsPerPage);
+                    } else {
+                        searchContent(activeType, query, sortBy, offset + itemsPerPage);
+                    }
+                });
+                topPagination.appendChild(nextButton);
+                bottomPagination.appendChild(nextButton.cloneNode(true));
+            }
+        }
+        
+        // Sayfalama butonu oluşturma
+        function createPaginationButton(content, onClick, isActive = false) {
+            const button = document.createElement('button');
+            button.innerHTML = content;
+            if (isActive) button.classList.add('active');
+            button.addEventListener('click', onClick);
+            return button;
+        }
+        
+        // Sayıları formatlama (binlik ayırıcılar ekleme)
+        function formatNumber(num) {
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+        
+        // Tarihi formatlama
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString(currentLang === 'tr' ? 'tr-TR' : 'ru-RU');
+        }
+        
+        // İndirme modalını açma - TAMAMEN YENİDEN YAZILDI
+        async function openDownloadModal(id, title) {
+            const t = translations[currentLang];
+            document.getElementById('modalTitle').textContent = `${title} - ${t.download}`;
+            const modal = document.getElementById('downloadModal');
+            modal.classList.add('show');
+            modal.style.display = 'flex';
+            
+            // Modal içeriğini temizle
+            document.getElementById('versionList').innerHTML = '<div class="no-files">Yükleniyor...</div>';
+            document.getElementById('loaderList').innerHTML = '<div class="no-files">Yükleniyor...</div>';
+            document.getElementById('fileList').innerHTML = '<div class="no-files">Yükleniyor...</div>';
+            
+            try {
+                // Proje sürümlerini al
+                const response = await fetch(`https://api.modrinth.com/v2/project/${id}/version`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const versions = await response.json();
+                
+                // Tüm sürüm türlerini kabul et (release, beta, alpha)
+                const allVersions = [...new Set(versions.flatMap(v => v.game_versions || []))].sort().reverse();
+                const allLoaders = [...new Set(versions.flatMap(v => v.loaders || []))].sort();
+                
+                // Sürümleri göster
+                const versionList = document.getElementById('versionList');
+                versionList.innerHTML = '';
+                
+                if (allVersions.length === 0) {
+                    versionList.innerHTML = `<div class="no-files">${t.noVersions}</div>`;
+                } else {
+                    allVersions.forEach(version => {
+                        const versionItem = document.createElement('div');
+                        versionItem.className = 'version-item';
+                        versionItem.textContent = version;
+                        versionList.appendChild(versionItem);
+                    });
+                    // İlk sürümü seç
+                    versionList.firstChild.classList.add('active');
+                }
+                
+                // Loader'ları göster
+                const loaderList = document.getElementById('loaderList');
+                loaderList.innerHTML = '';
+                
+                if (allLoaders.length === 0) {
+                    loaderList.innerHTML = `<div class="no-files">${t.noLoaders}</div>`;
+                } else {
+                    allLoaders.forEach(loader => {
+                        const loaderItem = document.createElement('div');
+                        loaderItem.className = 'loader-item';
+                        loaderItem.textContent = loader;
+                        loaderList.appendChild(loaderItem);
+                    });
+                    // İlk loader'ı seç
+                    loaderList.firstChild.classList.add('active');
+                }
+                
+                // Dosyaları göster
+                updateFiles(versions, allVersions[0], allLoaders[0]);
+                
+                // Event listener'ları ekle
+                versionList.addEventListener('click', (e) => {
+                    if (e.target.classList.contains('version-item')) {
+                        document.querySelectorAll('.version-item').forEach(item => item.classList.remove('active'));
+                        e.target.classList.add('active');
+                        const selectedLoader = document.querySelector('.loader-item.active');
+                        if (selectedLoader) {
+                            updateFiles(versions, e.target.textContent, selectedLoader.textContent);
+                        }
+                    }
+                });
+                
+                loaderList.addEventListener('click', (e) => {
+                    if (e.target.classList.contains('loader-item')) {
+                        document.querySelectorAll('.loader-item').forEach(item => item.classList.remove('active'));
+                        e.target.classList.add('active');
+                        const selectedVersion = document.querySelector('.version-item.active');
+                        if (selectedVersion) {
+                            updateFiles(versions, selectedVersion.textContent, e.target.textContent);
+                        }
+                    }
+                });
+                
+            } catch (error) {
+                console.error('Sürüm yükleme hatası:', error);
+                document.getElementById('versionList').innerHTML = `<div class="no-files">${t.errorLoading}</div>`;
+                document.getElementById('loaderList').innerHTML = `<div class="no-files">${t.errorLoading}</div>`;
+                document.getElementById('fileList').innerHTML = `<div class="no-files">${t.errorLoading}</div>`;
+            }
+        }
+        
+        // Dosyaları güncelle
+        function updateFiles(versions, selectedVersion, selectedLoader) {
+            const t = translations[currentLang];
+            const fileList = document.getElementById('fileList');
+            fileList.innerHTML = '';
+            
+            // Seçilen sürüm ve loader'a uygun sürümleri filtrele
+            const filteredVersions = versions.filter(v => 
+                (v.game_versions || []).includes(selectedVersion) && 
+                (v.loaders || []).includes(selectedLoader)
+            );
+            
+            if (filteredVersions.length === 0) {
+                fileList.innerHTML = `<div class="no-files">${t.noFiles}</div>`;
+                return;
+            }
+            
+            // Tüm dosyaları topla
+            const allFiles = [];
+            filteredVersions.forEach(version => {
+                if (version.files && version.files.length > 0) {
+                    version.files.forEach(file => {
+                        allFiles.push({
+                            ...file,
+                            version: version.version_number,
+                            date: version.date_published
+                        });
+                    });
+                }
+            });
+            
+            if (allFiles.length === 0) {
+                fileList.innerHTML = `<div class="no-files">${t.noFiles}</div>`;
+                return;
+            }
+            
+            // Dosyaları göster
+            allFiles.forEach(file => {
+                const fileItem = document.createElement('div');
+                fileItem.className = 'file-item';
+                
+                const fileSize = file.size ? (file.size / 1024 / 1024).toFixed(2) : 'Bilinmiyor';
+                const safeUrl = file.url.replace(/'/g, "\\'");
+                const safeFilename = file.filename.replace(/'/g, "\\'");
+                
+                fileItem.innerHTML = `
+                    <div class="file-info">
+                        <div class="file-name">${file.filename}</div>
+                        <div class="file-details">${fileSize} ${t.fileSize} • ${file.version}</div>
+                    </div>
+                    <button class="download-file" onclick="downloadFile('${safeUrl}', '${safeFilename}')">
+                        <i class="fas fa-download"></i> ${t.download}
+                    </button>
+                `;
+                fileList.appendChild(fileItem);
+            });
+        }
+        
+        // Modal kapatma
+        function closeModal() {
+            const modal = document.getElementById('downloadModal');
+            modal.classList.remove('show');
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+        }
+        
+        // Dosya indirme fonksiyonu
+        async function downloadFile(url, filename) {
+            const t = translations[currentLang];
+            try {
+                // Dosyayı indir
+                const response = await fetch(url);
+                const blob = await response.blob();
+                
+                // Tarayıcıda indirme işlemini başlat
+                const downloadUrl = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = downloadUrl;
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(downloadUrl);
+                
+                // Modalı kapat
+                closeModal();
+                
+                alert(`${filename} ${t.downloadSuccess}`);
+            } catch (error) {
+                console.error('İndirme hatası:', error);
+                alert(t.downloadError);
+            }
+        }
+    </script>
+</body>
+</html>
